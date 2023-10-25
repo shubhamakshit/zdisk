@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Converter</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>URL Converter</h2>
+        <div class="form-group">
+            <label for="originalUrl">Enter the Original URL:</label>
+            <input type="text" class="form-control" id="originalUrl" placeholder="https://zdisk.fun/..." >
+        </div>
+        <button class="btn btn-primary" onclick="convertURL()">Convert</button>
+        <p class="mt-3">Converted URL: <span id="convertedUrl"></span></p>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function convertURL() {
+            const originalUrl = document.getElementById("originalUrl").value;
+            const regex = /https:\/\/zdisk.fun\/(\d+)\/b\/\d+\/ez4short.com\/\w+\/u\/(\w+)/;
+            const match = originalUrl.match(regex);
+            if (match) {
+                const id = match[1];
+                const kid = match[2];
+                const convertedUrl = `https://zdisk.fun/m?=b${id}/u/${kid}`;
+                // Create a clickable link
+                const link = document.createElement('a');
+                link.href = convertedUrl;
+                link.textContent = convertedUrl;
+                link.target = "_blank"; // Open in a new tab
+                document.getElementById("convertedUrl").innerHTML = ''; // Clear previous content
+                document.getElementById("convertedUrl").appendChild(link);
+            } else {
+                document.getElementById("convertedUrl").innerText = "Invalid URL format";
+            }
+        }
+    </script>
+</body>
+</html>
